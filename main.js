@@ -24,7 +24,7 @@ const config={
 
 //? for data of clans 
 
-app.get('/clans/:clanTag', async(req, res)=>{
+app.get('stats/clans/:clanTag', async(req, res)=>{
 // ? everything will be a form post method 
 
     const clanTag = req.params.clanTag;
@@ -49,7 +49,7 @@ app.get('/clans/:clanTag', async(req, res)=>{
 });
 
 
-app.get('/players/:playertag', (req, res) => {
+app.get('stats/players/:playertag', (req, res) => {
     const playerTag = req.params.playertag;
     axios.get(`${baseUrl}players/%23${playerTag}`, config)
     // the %23 is eual to # when not encoded 
