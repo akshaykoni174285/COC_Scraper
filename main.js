@@ -1,16 +1,26 @@
-import  express  from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
-import dotenv from "dotenv";
-import { stringify } from "qs";
 
-dotenv.config();
 
+const express = require("express");
+const axios = require("axios");
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
 
 const app = express();
 const port = 3000;
-app.set('view engine', 'ejs');
+
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+// app.set('view engine', 'ejs');
+
+app.use("/",require("./routes/index"));
+
+
+
 const Clan_Tag = "#2RGLLCGC";
 const baseUrl = "https://api.clashofclans.com/v1/";
 
@@ -23,11 +33,18 @@ const config={
 };
 
 //? for data of clans 
+ 
+app.get('/',async(req,res) => {
+    
+    res.send("worling ");
+})
 
-app.get('stats/clans/:clanTag', async(req, res)=>{
+app.get('/stats/clans/:clanTag', async(req, res)=>{
 // ? everything will be a form post method 
 
     const clanTag = req.params.clanTag;
+
+    console.log(req.body);
    
     axios.get(`${baseUrl}clans/%23${clanTag}`, config)
     // the %23 is eual to # when not encoded 
@@ -49,7 +66,7 @@ app.get('stats/clans/:clanTag', async(req, res)=>{
 });
 
 
-app.get('stats/players/:playertag', (req, res) => {
+app.get('/stats/players/:playertag', (req, res) => {
     const playerTag = req.params.playertag;
     axios.get(`${baseUrl}players/%23${playerTag}`, config)
     // the %23 is eual to # when not encoded 
