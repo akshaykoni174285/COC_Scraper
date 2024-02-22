@@ -1,4 +1,4 @@
-const { currentSeasonService } = require("../../services/Rankings/ranking");
+const { currentSeasonService } = require("../../services/season_ranking/season_ranking");
 
 const currentSeasonController = async (req,res,next) => {
 

@@ -1,4 +1,4 @@
-const { getClanInfo } = require("../coc_apis/coc_apis");
+const { getClanInfo } = require("../clan_info/clan_info");
 
 const currentSeasonService = async (req) => {
     const clanTags = req.clanTags;
